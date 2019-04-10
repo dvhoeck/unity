@@ -209,6 +209,8 @@ ModelImporter:
     100406: Sphere.003_cell.170
     100408: Sphere.003_cell.171
     100410: Wings.001
+    100412: Left Ridge
+    100414: Right Ridge
     400000: Body
     400002: body.000
     400004: body.001
@@ -415,6 +417,8 @@ ModelImporter:
     400406: Sphere.003_cell.170
     400408: Sphere.003_cell.171
     400410: Wings.001
+    400412: Left Ridge
+    400414: Right Ridge
     2000000: Camera
     2100000: Material.018
     2100002: Material.029
@@ -669,6 +673,8 @@ ModelImporter:
     2300400: Sphere.003_cell.170
     2300402: Sphere.003_cell.171
     2300404: Wings.001
+    2300406: Left Ridge
+    2300408: Right Ridge
     3300000: Body
     3300002: body.000
     3300004: body.001
@@ -872,6 +878,8 @@ ModelImporter:
     3300400: Sphere.003_cell.170
     3300402: Sphere.003_cell.171
     3300404: Wings.001
+    3300406: Left Ridge
+    3300408: Right Ridge
     4300000: Right Engine
     4300002: Right Wing
     4300004: Sphere.003_cell.171
@@ -1075,6 +1083,8 @@ ModelImporter:
     4300400: Sphere.003
     4300402: Plane.009
     4300404: Cube.006
+    4300406: Right Ridge
+    4300408: Left Ridge
     7400000: Right Engine|BodyAction
     7400002: Right Engine|Left EngineAction
     7400004: Right Engine|Left WingAction
@@ -1124,8 +1134,79 @@ ModelImporter:
     7400092: Left Wing|Plane.005Action
     7400094: Left Wing|Right EngineAction
     7400096: Left Wing|Right WingAction
+    7400098: Right Ridge|BodyAction
+    7400100: Right Ridge|BodyAction.001
+    7400102: Right Ridge|Left EngineAction
+    7400104: Right Ridge|Left EngineAction.001
+    7400106: Right Ridge|Left WingAction
+    7400108: Right Ridge|Left WingAction.001
+    7400110: Right Ridge|MohawkAction
+    7400112: Right Ridge|MohawkAction.001
+    7400114: Right Ridge|Plane.005Action
+    7400116: Right Ridge|Right EngineAction
+    7400118: Right Ridge|Right EngineAction.001
+    7400120: Right Ridge|Right RidgeAction
+    7400122: Right Ridge|Right WingAction
+    7400124: Right Ridge|Right WingAction.001
+    7400126: Right Engine|BodyAction.001
+    7400128: Right Engine|Left EngineAction.001
+    7400130: Right Engine|Left WingAction.001
+    7400132: Right Engine|MohawkAction.001
+    7400134: Right Engine|Right EngineAction.001
+    7400136: Right Engine|Right RidgeAction
+    7400138: Right Engine|Right WingAction.001
+    7400140: Right Wing|BodyAction.001
+    7400142: Right Wing|Left EngineAction.001
+    7400144: Right Wing|Left WingAction.001
+    7400146: Right Wing|MohawkAction.001
+    7400148: Right Wing|Right EngineAction.001
+    7400150: Right Wing|Right RidgeAction
+    7400152: Right Wing|Right WingAction.001
+    7400154: Mohawk|BodyAction.001
+    7400156: Mohawk|Left EngineAction.001
+    7400158: Mohawk|Left WingAction.001
+    7400160: Mohawk|MohawkAction.001
+    7400162: Mohawk|Right EngineAction.001
+    7400164: Mohawk|Right RidgeAction
+    7400166: Mohawk|Right WingAction.001
+    7400168: Left Ridge|BodyAction
+    7400170: Left Ridge|BodyAction.001
+    7400172: Left Ridge|Left EngineAction
+    7400174: Left Ridge|Left EngineAction.001
+    7400176: Left Ridge|Left WingAction
+    7400178: Left Ridge|Left WingAction.001
+    7400180: Left Ridge|MohawkAction
+    7400182: Left Ridge|MohawkAction.001
+    7400184: Left Ridge|Plane.005Action
+    7400186: Left Ridge|Right EngineAction
+    7400188: Left Ridge|Right EngineAction.001
+    7400190: Left Ridge|Right RidgeAction
+    7400192: Left Ridge|Right WingAction
+    7400194: Left Ridge|Right WingAction.001
+    7400196: Left Engine|BodyAction.001
+    7400198: Left Engine|Left EngineAction.001
+    7400200: Left Engine|Left WingAction.001
+    7400202: Left Engine|MohawkAction.001
+    7400204: Left Engine|Right EngineAction.001
+    7400206: Left Engine|Right RidgeAction
+    7400208: Left Engine|Right WingAction.001
+    7400210: Body|BodyAction.001
+    7400212: Body|Left EngineAction.001
+    7400214: Body|Left WingAction.001
+    7400216: Body|MohawkAction.001
+    7400218: Body|Right EngineAction.001
+    7400220: Body|Right RidgeAction
+    7400222: Body|Right WingAction.001
+    7400224: Left Wing|BodyAction.001
+    7400226: Left Wing|Left EngineAction.001
+    7400228: Left Wing|Left WingAction.001
+    7400230: Left Wing|MohawkAction.001
+    7400232: Left Wing|Right EngineAction.001
+    7400234: Left Wing|Right RidgeAction
+    7400236: Left Wing|Right WingAction.001
     9500000: //RootNode
     10800000: Lamp
+    11100000: //RootNode
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
@@ -1147,14 +1228,238 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Right Ridge|Right RidgeAction
+      takeName: Right Ridge|Right RidgeAction
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Right Engine|Right EngineAction.001
+      takeName: Right Engine|Right EngineAction.001
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Right Wing|Right WingAction.001
+      takeName: Right Wing|Right WingAction.001
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Mohawk|MohawkAction.001
+      takeName: Mohawk|MohawkAction.001
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Left Ridge|Plane.005Action
+      takeName: Left Ridge|Plane.005Action
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Left Engine|Left EngineAction.001
+      takeName: Left Engine|Left EngineAction.001
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Body|BodyAction.001
+      takeName: Body|BodyAction.001
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Left Wing|Left WingAction.001
+      takeName: Left Wing|Left WingAction.001
+      firstFrame: 0
+      lastFrame: 210
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -1204,7 +1509,7 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
