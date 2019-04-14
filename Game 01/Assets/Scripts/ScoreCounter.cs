@@ -6,7 +6,11 @@ using UnityEngine.UI;
 public class ScoreCounter : MonoBehaviour
 {
     public int Score;
-    public GameObject TextObject;
+    public GameObject ScoreTextObject;
+    public GameObject HighScoreTextObject;
+
+    private int _highScore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +20,17 @@ public class ScoreCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(TextObject != null)
+        if(ScoreTextObject != null)
         {
-            TextObject.GetComponent<Text>().text = "Score: " + Score;
+            ScoreTextObject.GetComponent<Text>().text = "Score: " + Score;
+        }
+
+        if (HighScoreTextObject != null)
+        {
+            if (_highScore < Score)
+                _highScore = Score;
+
+            HighScoreTextObject.GetComponent<Text>().text = "Hi-score: " + _highScore;
         }
     }
 

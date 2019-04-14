@@ -57,15 +57,13 @@ public class ProjectileControllerEnemy: MonoBehaviour
 
             playerController.PlayerIsHit();
 
-            
-
-            /*
+                        
             var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
             var position = contactPoint.point;
-
+            /*
             // damage contact (enemy)
             collision.gameObject.GetComponent<AI_EnemyBase>().Hit();
-
+            */
             if (HitPrefab != null)
             {
                 // spawn hit effect
@@ -82,7 +80,7 @@ public class ProjectileControllerEnemy: MonoBehaviour
                 // ...and despawn hit effect after duration has expired
                 Destroy(hit, timeToLive);
             }
-            */
+            
             Destroy(gameObject);
         }
     }

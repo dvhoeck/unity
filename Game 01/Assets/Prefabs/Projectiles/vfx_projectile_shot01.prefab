@@ -80,8 +80,9 @@ MonoBehaviour:
   FireRate: 20
   WeaponDamage: 1
   MuzzleFlashPrefab: {fileID: 0}
-  HitPrefab: {fileID: 5381487247858412006, guid: 7ada3b60ce5bb1144a5ec2ccc90caa58,
+  HitPrefab: {fileID: 5381487247858412006, guid: 8ab510d569f30d543a95b0165fcdd45f,
     type: 3}
+  ProjectileLifeTime: 15
 --- !u!1 &1584614762921376973
 GameObject:
   m_ObjectHideFlags: 0

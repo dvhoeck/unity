@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         _maxHitPoints = HitPoints;
 
         // DEBUG
-        //PlayerDeath();
+        //KillPlayer();
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         // movement
         DoMovement();
 
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyUp(KeyCode.Escape))
             ToggleUI();
     }
 
@@ -53,6 +53,14 @@ public class PlayerController : MonoBehaviour
 
     private void DoMovement()
     {
+        // crash on HP = 0
+        if (HitPoints <= 0)
+        {
+            var killMovement = new Vector3(0.0f, -0.25f, -1.05f);
+            _rigidbody.AddForce(killMovement * Speed);
+            return;
+        }
+
         float moveH, inputH, moveV, inputV;
         moveH = moveV = 0.0f;
         inputH = Input.GetAxis("Horizontal");
@@ -105,15 +113,26 @@ public class PlayerController : MonoBehaviour
 
         // check if player dies
         if (HitPoints <= 0)
-            PlayerDeath();
+            KillPlayer();
     }
 
-    private void PlayerDeath()
+    private void KillPlayer()
     {
+        HitPoints = 0;
+
         GameMenuUIObject.SetActive(true);
         var textGameOver = GameMenuUIObject.transform.Find("GameOver").gameObject;
         textGameOver.SetActive(true);
 
-        Destroy(gameObject);
+
+        var jetAuduio = GetComponentsInChildren<AudioSource>();
+        jetAuduio.ToList().ForEach(audio => audio.Stop());
+
+        var deathAudio = GetComponent<AudioSource>();
+        deathAudio.Play();
+
+        
+
+        Destroy(gameObject, 13.5f);
     }
 }

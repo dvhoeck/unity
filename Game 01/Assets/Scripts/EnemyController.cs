@@ -38,6 +38,11 @@ public class EnemyController : MonoBehaviour
             var enemy = Instantiate(EnemyRoster[/*_currentEnemyRosterIndex*/randomEnemyIndex], new Vector3(x, y, 20), Camera.main.transform.rotation);
             _activeEnemies.Add(enemy);
 
+
+            Destroy(enemy, 30.0f);
+
+            
+
             /*
             _currentEnemyRosterIndex++;
             _currentEnemyRosterIndex = _currentEnemyRosterIndex % EnemyRoster.Count;*/
