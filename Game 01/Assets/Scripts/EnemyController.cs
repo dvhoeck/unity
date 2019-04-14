@@ -9,7 +9,7 @@ public class EnemyController : MonoBehaviour
     public float ConsecutiveSpawnsDelay = 5.0f;
 
     private List<GameObject> _activeEnemies = new List<GameObject>();
-    private int _currentEnemyRosterIndex;
+    //private int _currentEnemyRosterIndex;
     private float lastSpawn = 0.0f;
     
     // Start is called before the first frame update
@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour
 
         if (_activeEnemies.Count < MaxEnemiesOnScreen 
             && EnemyRoster.Count > 0 
-            && EnemyRoster[_currentEnemyRosterIndex] != null
+           // && EnemyRoster[_currentEnemyRosterIndex] != null
             && Time.time >= (lastSpawn + ConsecutiveSpawnsDelay))
         {
             lastSpawn = Time.time;
@@ -33,11 +33,14 @@ public class EnemyController : MonoBehaviour
             int x  = UnityEngine.Random.Range(0, 5);
             int y = UnityEngine.Random.Range(0, 5);
 
-            var enemy = Instantiate(EnemyRoster[_currentEnemyRosterIndex], new Vector3(x, y, 20), Camera.main.transform.rotation);
+            var randomEnemyIndex = UnityEngine.Random.Range(0, EnemyRoster.Count);
+
+            var enemy = Instantiate(EnemyRoster[/*_currentEnemyRosterIndex*/randomEnemyIndex], new Vector3(x, y, 20), Camera.main.transform.rotation);
             _activeEnemies.Add(enemy);
 
+            /*
             _currentEnemyRosterIndex++;
-            _currentEnemyRosterIndex = _currentEnemyRosterIndex % EnemyRoster.Count;
+            _currentEnemyRosterIndex = _currentEnemyRosterIndex % EnemyRoster.Count;*/
         }
     }
 }

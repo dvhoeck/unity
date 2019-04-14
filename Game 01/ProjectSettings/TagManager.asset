@@ -9,6 +9,7 @@ TagManager:
   - CasingEjection
   - Enemies
   - Projectile
+  - UI
   layers:
   - Default
   - TransparentFX

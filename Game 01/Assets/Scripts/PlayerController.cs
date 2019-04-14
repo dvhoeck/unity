@@ -1,15 +1,34 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public float Speed;
+    public float HitPoints = 1;
+    public Image HPCurrentUiObject;
+    public GameObject GameMenuUIObject;
+
     private Rigidbody _rigidbody;
+    private float _maxHitPoints;
 
     // Start is called before the first frame update
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+
+        if(HPCurrentUiObject == null)
+            throw new InvalidOperationException("Current HP UI object is null");
+
+        if (GameMenuUIObject == null)
+            throw new InvalidOperationException("Game Over UI object is null");
+
+        _maxHitPoints = HitPoints;
+
+        // DEBUG
+        //PlayerDeath();
     }
 
     // Update is called once per frame
@@ -21,6 +40,19 @@ public class PlayerController : MonoBehaviour
     private void HandleInput()
     {
         // movement
+        DoMovement();
+
+        if (Input.GetKey(KeyCode.Escape))
+            ToggleUI();
+    }
+
+    private void ToggleUI()
+    {
+        GameMenuUIObject.SetActive(!GameMenuUIObject.activeSelf);
+    }
+
+    private void DoMovement()
+    {
         float moveH, inputH, moveV, inputV;
         moveH = moveV = 0.0f;
         inputH = Input.GetAxis("Horizontal");
@@ -44,7 +76,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        transform.localRotation = Quaternion.Euler(-6 * _rigidbody.velocity.y, 0,  -6 * _rigidbody.velocity.x);
+        transform.localRotation = Quaternion.Euler(-6 * _rigidbody.velocity.y, 0, -6 * _rigidbody.velocity.x);
 
         if (inputV != 0)
         {
@@ -56,5 +88,32 @@ public class PlayerController : MonoBehaviour
 
         var movement = new Vector3(moveH, moveV, 0.0f);
         _rigidbody.AddForce(movement * Speed);
+    }
+
+    internal void PlayerIsHit(float damage = 1)
+    {
+        // set score to 0
+        var scoreCounter = Camera.main.GetComponent<ScoreCounter>();
+        scoreCounter.AddScore(-scoreCounter.Score);
+
+        // deal damage
+        HitPoints -= damage;
+
+        // decrease current HP UI bar
+        var newBarSize = HitPoints / _maxHitPoints;
+        HPCurrentUiObject.rectTransform.localScale = new Vector3(newBarSize, 1, 1);
+
+        // check if player dies
+        if (HitPoints <= 0)
+            PlayerDeath();
+    }
+
+    private void PlayerDeath()
+    {
+        GameMenuUIObject.SetActive(true);
+        var textGameOver = GameMenuUIObject.transform.Find("GameOver").gameObject;
+        textGameOver.SetActive(true);
+
+        Destroy(gameObject);
     }
 }

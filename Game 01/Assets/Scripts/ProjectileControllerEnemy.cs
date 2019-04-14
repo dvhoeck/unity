@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Effects;
@@ -52,10 +53,11 @@ public class ProjectileControllerEnemy: MonoBehaviour
         {
             var contactPoint = collision.GetContact(0);
 
+            var playerController = collision.gameObject.GetComponent<PlayerController>() ?? throw new InvalidOperationException("No player controller script found");
 
-            // 1 hit = reset to 0 points
-            var scoreCounter = Camera.main.GetComponent<ScoreCounter>();
-            scoreCounter.AddScore(-scoreCounter.Score); 
+            playerController.PlayerIsHit();
+
+            
 
             /*
             var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
