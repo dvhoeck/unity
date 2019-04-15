@@ -128,7 +128,7 @@ MonoBehaviour:
   Fire01Prefab: {fileID: 1037435722591473900, guid: 96824023d864adc48b6c40014d8ad3eb,
     type: 3}
   FirePoint01: {fileID: 6015856506199454778}
-  Fire01FireDelayModifier: 3
+  Fire01FireDelayModifier: 1
 --- !u!1 &6015856506199454778
 GameObject:
   m_ObjectHideFlags: 0

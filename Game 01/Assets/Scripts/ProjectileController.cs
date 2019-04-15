@@ -35,34 +35,27 @@ public class ProjectileController : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider collider)
     {
-        if (Speed > 0)
-            transform.position += transform.forward * (Speed * Time.deltaTime); // forward is relative to the fire point's rotation
-    }
+        Debug.Log(collider);
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Speed = 0;
-
-        if (collision.gameObject.tag == "Enemies")
+        if (collider.gameObject.tag == "Enemies")
         {
-            var contactPoint = collision.GetContact(0);
+            var contactPoint = collider.ClosestPointOnBounds(transform.position);
 
             // 1 hit = 100 points
-            Camera.main.GetComponent<ScoreCounter>().AddScore(100); 
+            Camera.main.GetComponent<ScoreCounter>().AddScore(100);
 
-            var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
-            var position = contactPoint.point;
+            var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint);
+            //var position = contactPoint.point;
 
             // damage contact (enemy)
-            collision.gameObject.GetComponent<AI_EnemyBase>().Hit();
+            collider.gameObject.GetComponent<AI_EnemyBase>().Hit();
 
             if (HitPrefab != null)
             {
                 // spawn hit effect
-                var hit = Instantiate(HitPrefab, position, rotation);
+                var hit = Instantiate(HitPrefab, contactPoint, rotation);
 
                 // get duration of hit particle system...
                 var hitParticleSystem = hit.GetComponent<ParticleSystem>();
@@ -78,4 +71,49 @@ public class ProjectileController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Speed > 0)
+            transform.position += transform.forward * (Speed * Time.deltaTime); // forward is relative to the fire point's rotation
+    }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    Speed = 0;
+
+    //    if (collision.gameObject.tag == "Enemies")
+    //    {
+    //        var contactPoint = collision.GetContact(0);
+
+    //        // 1 hit = 100 points
+    //        Camera.main.GetComponent<ScoreCounter>().AddScore(100); 
+
+    //        var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
+    //        var position = contactPoint.point;
+
+    //        // damage contact (enemy)
+    //        collision.gameObject.GetComponent<AI_EnemyBase>().Hit();
+
+    //        if (HitPrefab != null)
+    //        {
+    //            // spawn hit effect
+    //            var hit = Instantiate(HitPrefab, position, rotation);
+
+    //            // get duration of hit particle system...
+    //            var hitParticleSystem = hit.GetComponent<ParticleSystem>();
+    //            var timeToLive = 0.0f;
+    //            if (hitParticleSystem != null)
+    //                timeToLive = hitParticleSystem.main.duration;
+    //            else
+    //                timeToLive = hit.transform.GetChild(0).GetComponent<ParticleSystem>().main.duration;
+
+    //            // ...and despawn hit effect after duration has expired
+    //            Destroy(hit, timeToLive);
+    //        }
+    //        Destroy(gameObject);
+    //    }
+        
+    //}
 }
