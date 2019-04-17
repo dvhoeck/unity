@@ -47,7 +47,6 @@ public class ProjectileController : MonoBehaviour
             Camera.main.GetComponent<ScoreCounter>().AddScore(100);
 
             var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint);
-            //var position = contactPoint.point;
 
             // damage contact (enemy)
             collider.gameObject.GetComponent<AI_EnemyBase>().Hit();

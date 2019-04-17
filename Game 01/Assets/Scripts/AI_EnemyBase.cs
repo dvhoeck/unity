@@ -6,7 +6,7 @@ using UnityStandardAssets.Effects;
 
 public class AI_EnemyBase : MonoBehaviour
 {
-    public int HitPoints;
+    public float HitPoints;
     public float Speed;
     public GameObject ExplosionPrefab;
 
@@ -63,7 +63,7 @@ public class AI_EnemyBase : MonoBehaviour
 
     
 
-    public virtual void Hit(int damage = 1)
+    public virtual void Hit(float damage = 1)
     {
         HitPoints -= damage;
         if(HitPoints <= 0)

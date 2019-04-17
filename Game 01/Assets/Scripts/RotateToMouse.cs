@@ -5,8 +5,10 @@ public class RotateToMouse : MonoBehaviour
     public Camera Camera;
     public float MaximumLength;
 
+    private GameObject _objectHit;
     private Ray _rayMouse;
     private Vector3 _position;
+    private Vector3 _normal;
     private Vector3 _direction;
     private Quaternion _rotation;
 
@@ -22,20 +24,25 @@ public class RotateToMouse : MonoBehaviour
         RaycastHit hit;
         var mousePos = Input.mousePosition;
         _rayMouse = Camera.ScreenPointToRay(mousePos);
-        var position = _rayMouse.GetPoint(MaximumLength);
+        _position = _rayMouse.GetPoint(MaximumLength);
 
         if (Physics.Raycast(_rayMouse.origin, _rayMouse.direction, out hit, MaximumLength * 100) && hit.rigidbody?.gameObject?.tag == "Enemies")
         {
+            _objectHit = hit.rigidbody.gameObject;
+
             Debug.Log(hit.rigidbody?.gameObject?.tag);
 
-            //if (hit.rigidbody?.gameObject?.tag == "Enemies")
-                RotateToMouseDirection(gameObject, hit.point);
-            //else
-            //    RotateToMouseDirection(gameObject, position);
+            RotateToMouseDirection(gameObject, hit.point);
+
+            _position = hit.point;
+
+            _normal = hit.normal;
         }
         else
         {
-            RotateToMouseDirection(gameObject, position);
+            RotateToMouseDirection(gameObject, _position);
+            _normal = _position;
+            _objectHit = null;
         }
     }
 
@@ -50,4 +57,19 @@ public class RotateToMouse : MonoBehaviour
     {
         return _rotation;
     }
+
+    public Vector3 GetHitObjectPosition()
+    {
+        return _position;
+    }
+    public Vector3 GetHitObjectNormal()
+    {
+        return _normal;
+    }
+
+    public GameObject GetHitObject()
+    {
+        return _objectHit;
+    }
+
 }
