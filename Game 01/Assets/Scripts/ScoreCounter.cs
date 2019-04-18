@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,8 +7,10 @@ using UnityEngine.UI;
 public class ScoreCounter : MonoBehaviour
 {
     public int Score;
+    public float AmmoCount;
     public GameObject ScoreTextObject;
     public GameObject HighScoreTextObject;
+    public GameObject AmmoTextObject;
 
     private int _highScore;
 
@@ -32,10 +35,21 @@ public class ScoreCounter : MonoBehaviour
 
             HighScoreTextObject.GetComponent<Text>().text = "Hi-score: " + _highScore;
         }
+
+        if (AmmoTextObject != null)
+        {
+            
+            AmmoTextObject.GetComponent<Text>().text = "Ammo count: " + AmmoCount;
+        }
     }
 
     public void AddScore(int scoreModifier)
     {
         Score += scoreModifier;
+    }
+
+    internal void SetFire02Ammo(float fire02AmmoCount)
+    {
+        AmmoCount = fire02AmmoCount;
     }
 }

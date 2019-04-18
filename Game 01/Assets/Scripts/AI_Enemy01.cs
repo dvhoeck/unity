@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AI_Enemy01 : AI_EnemyBase
@@ -24,7 +25,25 @@ public class AI_Enemy01 : AI_EnemyBase
 
         if (FirePoint01 != null)
         {
-            effect = Instantiate(Fire01Prefab, FirePoint01.transform.position, Quaternion.identity);
+            //effect = Instantiate(Fire01Prefab, FirePoint01.transform.position, Quaternion.identity);
+            //effect = Instantiate(Fire01Prefab, FirePoint01.transform.position, Quaternion.Euler(0, 90, 0));
+
+            // register player ship position at start of projectile life
+            var player = GameObject.FindGameObjectsWithTag("Player").ToList().Where(taggedAsPlayer => taggedAsPlayer.name == "PlayerShip").SingleOrDefault();
+
+            // get position of target object
+            Vector3 targetPosition = player.transform.position;
+
+            // calculate rotation to be done
+            Quaternion targetRotation = Quaternion.LookRotation(targetPosition - FirePoint01.transform.position);
+
+            effect = Instantiate(Fire01Prefab, FirePoint01.transform.position, targetRotation);
+
+
+
+
+
+
             /*
             if (RotateToMouse != null)
             {

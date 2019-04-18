@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float HitPoints = 1;
     public Image HPCurrentUiObject;
     public GameObject GameMenuUIObject;
+    
 
     private Rigidbody _rigidbody;
     private float _maxHitPoints;
@@ -72,18 +73,14 @@ public class PlayerController : MonoBehaviour
             if (inputH < 0) // go left
             {
                 moveH = Camera.main.WorldToScreenPoint(_rigidbody.position).x <= (0 + (Screen.width * 0.1)) ? 0.0f : inputH;
-
-                // bank left, max 30°
             }
             else // go right
             {
                 moveH = Camera.main.WorldToScreenPoint(_rigidbody.position).x >= (Screen.width - (Screen.width * 0.1)) ? 0.0f : inputH;
-
-                // bank right, max 30°
-
             }
         }
 
+        // rotate ship according to x and y velocity
         transform.localRotation = Quaternion.Euler(-6 * _rigidbody.velocity.y, 0, -6 * _rigidbody.velocity.x);
 
         if (inputV != 0)
