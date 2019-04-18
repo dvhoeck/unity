@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityStandardAssets.Effects;
 
@@ -12,6 +13,9 @@ public class ProjectileControllerEnemy: MonoBehaviour
     public GameObject MuzzleFlashPrefab;
     public GameObject HitPrefab;
     public float ProjectileLifeTime = 15.0f;
+
+    private Vector3? _playerPosition;
+    private bool _followPlayer = true;
 
     // Start is called before the first frame update
     void Start()
@@ -36,13 +40,31 @@ public class ProjectileControllerEnemy: MonoBehaviour
 
         // destroy this projectile after ProjectileLifeTime seconds
         Destroy(gameObject, ProjectileLifeTime);
+
+        // register player ship position at start of projectile life
+        var player = GameObject.FindGameObjectsWithTag("Player").ToList().Where(taggedAsPlayer => taggedAsPlayer.name == "PlayerShip").SingleOrDefault();
+        _playerPosition = player?.transform.position; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Speed > 0)
-            transform.position += transform.forward * (-Speed * Time.deltaTime); // forward is relative to the fire point's rotation
+        //var player = GameObject.FindGameObjectsWithTag("Player").ToList();
+        //var tmp = player.Where(taggedAsPlayer => taggedAsPlayer.name == "PlayerShip").Single();
+        //Quaternion.FromToRotation(Vector3.up, tmp.transform.position);
+
+        // Move our position a step closer to the target.
+
+        //if (Vector3.Distance(transform.position, (Vector3)_playerPosition) < 0.001f)
+        //    _followPlayer = false;
+
+        //if (_playerPosition != null && _followPlayer)
+        //{
+        //    var step = Speed * Time.deltaTime; // calculate distance to move
+        //    transform.position = Vector3.MoveTowards(transform.position, (Vector3)_playerPosition, step);
+        //} else
+            transform.position += transform.forward * (Speed * Time.deltaTime); // forward is relative to the fire point's rotation
+
     }
 
     //private void OnCollisionEnter(Collision collision)
@@ -57,7 +79,7 @@ public class ProjectileControllerEnemy: MonoBehaviour
 
     //        playerController.PlayerIsHit();
 
-                        
+
     //        var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
     //        var position = contactPoint.point;
     //        /*
@@ -80,7 +102,7 @@ public class ProjectileControllerEnemy: MonoBehaviour
     //            // ...and despawn hit effect after duration has expired
     //            Destroy(hit, timeToLive);
     //        }
-            
+
     //        Destroy(gameObject);
     //    }
     //}
