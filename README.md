@@ -1,4 +1,4 @@
-# unity
+# Unity
 Game development using Unity
 
 # Type
