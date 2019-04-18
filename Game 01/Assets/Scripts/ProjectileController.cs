@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityStandardAssets.Effects;
+﻿using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
@@ -12,7 +9,7 @@ public class ProjectileController : MonoBehaviour
     public GameObject HitPrefab;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         if (MuzzleFlashPrefab != null)
         {
@@ -23,7 +20,7 @@ public class ProjectileController : MonoBehaviour
             // get duration of muzzle flash particle system...
             var muzzleFlashParticleSystem = MuzzleFlash.GetComponent<ParticleSystem>();
             var timeToLive = 0.0f;
-            if(muzzleFlashParticleSystem != null)
+            if (muzzleFlashParticleSystem != null)
                 timeToLive = muzzleFlashParticleSystem.main.duration;
             else
                 timeToLive = MuzzleFlash.transform.GetChild(0).GetComponent<ParticleSystem>().main.duration;
@@ -31,8 +28,6 @@ public class ProjectileController : MonoBehaviour
             // ...and despawn muzzle flash after duration has expired
             Destroy(MuzzleFlash, timeToLive);
         }
-
-        
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -41,15 +36,15 @@ public class ProjectileController : MonoBehaviour
 
         if (collider.gameObject.tag == "Enemies")
         {
-            var contactPoint = collider.ClosestPointOnBounds(transform.position);
-
             // 1 hit = 100 points
             Camera.main.GetComponent<ScoreCounter>().AddScore(100);
 
-            var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint);
-
             // damage contact (enemy)
             collider.gameObject.GetComponent<AI_EnemyBase>().Hit();
+
+            // get the point of collision
+            var contactPoint = collider.ClosestPointOnBounds(transform.position);
+            var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint);
 
             if (HitPrefab != null)
             {
@@ -72,7 +67,7 @@ public class ProjectileController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Speed > 0)
             transform.position += transform.forward * (Speed * Time.deltaTime); // forward is relative to the fire point's rotation
@@ -87,7 +82,7 @@ public class ProjectileController : MonoBehaviour
     //        var contactPoint = collision.GetContact(0);
 
     //        // 1 hit = 100 points
-    //        Camera.main.GetComponent<ScoreCounter>().AddScore(100); 
+    //        Camera.main.GetComponent<ScoreCounter>().AddScore(100);
 
     //        var rotation = Quaternion.FromToRotation(Vector3.up, contactPoint.normal);
     //        var position = contactPoint.point;
@@ -113,6 +108,6 @@ public class ProjectileController : MonoBehaviour
     //        }
     //        Destroy(gameObject);
     //    }
-        
+
     //}
 }

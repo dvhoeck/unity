@@ -33,17 +33,14 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        
-
         // fire 1
-        if (Input.GetMouseButton(0) && Time.time >= _timeToFire)
+        if (Input.GetMouseButton(0) && Time.time >= _timeToFire) // create a delay between shots
         {
-            // create a delay between shots
             _timeToFire = Time.time + 1 / _fire01EffectToSpawn.GetComponent<ProjectileController>().FireRate;
             FireWeapon01();
         }
 
-        
+        // fire 2
         FireWeapon02();
     }
 
@@ -84,7 +81,7 @@ public class WeaponController : MonoBehaviour
         // get fire02's audio (is a child of FirePoint)
         var audioSource = FirePoint.GetComponent<AudioSource>();
 
-        // fire 02 shell ejection
+        // fire02 shell ejection
         _casingEjectors.ForEach(ejector =>
         {
             var particleSystem = ejector.GetComponent<ParticleSystem>();
@@ -109,24 +106,21 @@ public class WeaponController : MonoBehaviour
             // create hit effect on target
             var effect = Instantiate(Fire02HitEffect, RotateToMouse.GetHitObjectPosition(), Quaternion.FromToRotation(Vector3.up, RotateToMouse.GetHitObjectNormal()));
             effect.transform.localRotation = RotateToMouse.GetRotation();
-            
+
             // make sure effect is cleaned up after 10 secs
             Destroy(effect, 10.0f);
 
             // deal damage
             hitObject?.GetComponent<AI_EnemyBase>().Hit(0.2f);
 
-            
             // start fire02 audio, if it's not already playing
             if (!audioSource.isPlaying)
                 audioSource.Play();
 
             // decrease Fire02AmmoCount by Fire02AmmoConsumptionPerSecond per second
             _timeIsFiringFire02 += Time.deltaTime;
-
             if (_timeIsFiringFire02 >= (1.0f / Fire02FireRate)) // if fireRate is 10, shoot 10 times per second
             {
-
                 // decrease ammo by Fire02AmmoConsumption but do not go below zero
                 if (_fire02AmmoCount > 0)
                     _fire02AmmoCount -= Fire02AmmoConsumption;
@@ -144,11 +138,12 @@ public class WeaponController : MonoBehaviour
             audioSource.Stop();
         }
 
-        
-
         Debug.Log(_timeIsFiringFire02);
     }
 
+    /// <summary>
+    /// Show decreasing ammo count on screen
+    /// </summary>
     private void SetAmmoCounterUI()
     {
         // set ammo counter

@@ -1,15 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIController: MonoBehaviour
+public class UIController : MonoBehaviour
 {
+    /// <summary>
+    /// Quits the game
+    /// </summary>
     public void Quit()
     {
         Application.Quit();
     }
 
+    /// <summary>
+    /// Restarts the game
+    /// </summary>
     public void Restart()
     {
         SceneManager.LoadScene(0);

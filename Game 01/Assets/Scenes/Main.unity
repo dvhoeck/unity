@@ -511,6 +511,7 @@ MonoBehaviour:
   HitPoints: 5
   HPCurrentUiObject: {fileID: 2123675169}
   GameMenuUIObject: {fileID: 2097666507}
+  PlayerIsDead: 0
 --- !u!54 &291009208
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -768,7 +769,7 @@ GameObject:
   - component: {fileID: 343738780}
   - component: {fileID: 343738779}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -10,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float HitPoints = 1;
     public Image HPCurrentUiObject;
     public GameObject GameMenuUIObject;
-    
+    public bool PlayerIsDead = false;
 
     private Rigidbody _rigidbody;
     private float _maxHitPoints;
@@ -20,7 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
 
-        if(HPCurrentUiObject == null)
+        if (HPCurrentUiObject == null)
             throw new InvalidOperationException("Current HP UI object is null");
 
         if (GameMenuUIObject == null)
@@ -43,19 +42,23 @@ public class PlayerController : MonoBehaviour
         // movement
         DoMovement();
 
+        // toggle Game Menu display when escape is pressed and released
         if (Input.GetKeyUp(KeyCode.Escape))
-            ToggleUI();
+            ToggleGameMenu();
     }
 
-    private void ToggleUI()
+    /// <summary>
+    /// Toggles the ingame menu
+    /// </summary>
+    private void ToggleGameMenu()
     {
         GameMenuUIObject.SetActive(!GameMenuUIObject.activeSelf);
     }
 
     private void DoMovement()
     {
-        // crash on HP = 0
-        if (HitPoints <= 0)
+        // crash player ship on HP = 0
+        if (PlayerIsDead)
         {
             var killMovement = new Vector3(0.0f, -0.25f, -1.05f);
             _rigidbody.AddForce(killMovement * Speed);
@@ -71,17 +74,10 @@ public class PlayerController : MonoBehaviour
         if (inputH != 0)
         {
             if (inputH < 0) // go left
-            {
                 moveH = Camera.main.WorldToScreenPoint(_rigidbody.position).x <= (0 + (Screen.width * 0.1)) ? 0.0f : inputH;
-            }
             else // go right
-            {
                 moveH = Camera.main.WorldToScreenPoint(_rigidbody.position).x >= (Screen.width - (Screen.width * 0.1)) ? 0.0f : inputH;
-            }
         }
-
-        // rotate ship according to x and y velocity
-        transform.localRotation = Quaternion.Euler(-6 * _rigidbody.velocity.y, 0, -6 * _rigidbody.velocity.x);
 
         if (inputV != 0)
         {
@@ -91,8 +87,12 @@ public class PlayerController : MonoBehaviour
                 moveV = Camera.main.WorldToScreenPoint(_rigidbody.position).y >= (Screen.height - (Screen.height * 0.1)) ? 0.0f : inputV;
         }
 
+        // move player ship by adding force on X and Y axis
         var movement = new Vector3(moveH, moveV, 0.0f);
         _rigidbody.AddForce(movement * Speed);
+
+        // rotate ship according to x and y velocity to simulate aircraft attitude
+        transform.localRotation = Quaternion.Euler(-6 * _rigidbody.velocity.y, 0, -6 * _rigidbody.velocity.x);
     }
 
     internal void PlayerIsHit(float damage = 1)
@@ -115,21 +115,26 @@ public class PlayerController : MonoBehaviour
 
     private void KillPlayer()
     {
+        // set hit points to 0
         HitPoints = 0;
 
+        // set a flag to indicate player is dead
+        PlayerIsDead = true;
+
+        // show game over menu
         GameMenuUIObject.SetActive(true);
         var textGameOver = GameMenuUIObject.transform.Find("GameOver").gameObject;
         textGameOver.SetActive(true);
 
-
+        // stop engine sound
         var jetAuduio = GetComponentsInChildren<AudioSource>();
         jetAuduio.ToList().ForEach(audio => audio.Stop());
 
+        // play death sound
         var deathAudio = GetComponent<AudioSource>();
         deathAudio.Play();
 
-        
-
+        // destroy player ship when death sound has done playing
         Destroy(gameObject, 13.5f);
     }
 }

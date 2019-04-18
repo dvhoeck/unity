@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityStandardAssets.Effects;
 
 public class AI_EnemyBase : MonoBehaviour
@@ -14,17 +11,16 @@ public class AI_EnemyBase : MonoBehaviour
     private float _lastDirectionChange;
     private float _upDirectionModifier;
     private float _rightDirectionModifier;
-    
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _upDirectionModifier = 1.0f;
         _rightDirectionModifier = 1.0f;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // move
         DoMove();
@@ -58,15 +54,12 @@ public class AI_EnemyBase : MonoBehaviour
 
     public virtual void Attack()
     {
-        
     }
-
-    
 
     public virtual void Hit(float damage = 1)
     {
         HitPoints -= damage;
-        if(HitPoints <= 0)
+        if (HitPoints <= 0)
         {
             if (ExplosionPrefab != null)
             {
@@ -90,7 +83,7 @@ public class AI_EnemyBase : MonoBehaviour
                 throw new MissingComponentException("AI_Enemy_Base hit method is missing its hit prefab");
 
             Destroy(gameObject);
-            
+
             // 1 kill = 300 points
             Camera.main.GetComponent<ScoreCounter>().AddScore(300);
         }

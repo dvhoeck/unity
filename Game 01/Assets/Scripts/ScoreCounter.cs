@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreCounter : MonoBehaviour
@@ -15,15 +12,14 @@ public class ScoreCounter : MonoBehaviour
     private int _highScore;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(ScoreTextObject != null)
+        if (ScoreTextObject != null)
         {
             ScoreTextObject.GetComponent<Text>().text = "Score: " + Score;
         }
@@ -38,7 +34,6 @@ public class ScoreCounter : MonoBehaviour
 
         if (AmmoTextObject != null)
         {
-            
             AmmoTextObject.GetComponent<Text>().text = "Ammo count: " + AmmoCount;
         }
     }
